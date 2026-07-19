@@ -1,9 +1,12 @@
+import os
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-# Mock Database
-users_db = {"admin": "password123"} 
+# Configure uploads folder
+UPLOAD_FOLDER = 'uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def home():
@@ -11,10 +14,37 @@ def home():
 
 @app.route('/login', methods=['POST'])
 def login():
-    data = request.json
-    if users_db.get(data['username']) == data['password']:
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    
+    # DEBUG: Terminal will show what is being received
+    print(f"DEBUG: Received User: {username}, Password: {password}")
+    
+    # REPLACE "your_password_here" with your actual password
+    if username == "sa7028894@gmail.com" and password == "bawal111":
         return jsonify({"status": "success"})
-    return jsonify({"status": "fail"}), 401
+    return jsonify({"status": "failed"})
+
+@app.route('/analyze', methods=['POST'])
+def analyze():
+    if 'file' not in request.files:
+        return "No file part", 400
+    
+    file = request.files['file']
+    if file.filename == '':
+        return "No file selected", 400
+    
+    if file:
+        file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(file_path)
+        
+        analysis_results = {
+            "vulnerabilities": ["Reentrancy Attack", "Integer Overflow", "Unchecked Call"],
+            "severity": "High"
+        }
+        
+        return render_template('results.html', results=analysis_results)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlowZint Dashboard</title>
+    <style>
+        :root { --bg-color: #0f172a; --card-bg: rgba(30, 41, 59, 0.7); --accent-glow: #8b5cf6; --text-main: #f8fafc; }
+        body { margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle at top right, #1e1b4b, var(--bg-color)); font-family: 'Inter', sans-serif; }
+        .card { background: var(--card-bg); padding: 48px; border-radius: 24px; backdrop-filter: blur(20px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); text-align: center; width: 350px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        input { width: 100%; padding: 14px; margin: 12px 0; border-radius: 12px; background: #0f172a; color: white; border: 1px solid #334155; box-sizing: border-box; }
+        button { width: 100%; padding: 14px; background: var(--accent-glow); border: none; border-radius: 12px; color: white; cursor: pointer; margin-top: 10px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="card" id="app-container">
+        <div id="login-view">
+            <h2>Dashboard</h2>
+            <form id="loginForm">
+                <input id="user" placeholder="Username" required>
+                <input id="pass" type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <div id="upload-view" class="hidden">
+            <h2>Smart Contract</h2>
+            <form action="/analyze" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept=".sol" required>
+                <button type="submit">Run Analysis</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').onsubmit = async (e) => {
+            e.preventDefault();
+            // ... (Your existing fetch logic here) ...
+            if(result.status === 'success') {
+                document.getElementById('login-view').classList.add('hidden');
+                document.getElementById('upload-view').classList.remove('hidden');
+            }
+        };
+    </script>
+</body>
+</html>
