@@ -1,4 +1,4 @@
-# FlowZint-Contract-Analyser 
+# FlowZint-Contract-Analyser :-
  
 A web application that uses GenAI to analyze Solidity smart contracts for potential vulnerabilities and security issues. 
  
