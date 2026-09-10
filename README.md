@@ -22,9 +22,9 @@ pip install -r requirements.txt
 Set environment variables (never hardcode secrets): 
 ```bash 
 export GROQ_API_KEY="your_groq_api_key" 
-export APP_USERNAME="your_chosen_username"    # optional, defaults to "demo" 
-export APP_PASSWORD="your_chosen_password"    # optional, defaults to "demo123" 
-``` 
+export APP_USERNAME="your_chosen_username"    
+export APP_PASSWORD="your_chosen_password" 
+
  
 Run it: 
 ```bash 
