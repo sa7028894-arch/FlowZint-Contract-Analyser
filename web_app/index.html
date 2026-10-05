@@ -35,7 +35,7 @@
     <script>
         document.getElementById('loginForm').onsubmit = async (e) => {
             e.preventDefault();
-            // ... (Your existing fetch logic here) ...
+            
             if(result.status === 'success') {
                 document.getElementById('login-view').classList.add('hidden');
                 document.getElementById('upload-view').classList.remove('hidden');
