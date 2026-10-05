@@ -3,7 +3,6 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
-# Configure uploads folder
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -18,10 +17,8 @@ def login():
     username = data.get('username')
     password = data.get('password')
     
-    # DEBUG: Terminal will show what is being received
     print(f"DEBUG: Received User: {username}, Password: {password}")
     
-    # REPLACE "your_password_here" with your actual password
     if username == "sa7028894@gmail.com" and password == "bawal111":
         return jsonify({"status": "success"})
     return jsonify({"status": "failed"})
